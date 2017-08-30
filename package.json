@@ -1,0 +1,30 @@
+{
+  "name": "page-favicon",
+  "version": "0.0.1",
+  "description": "Get any website favicon using Puppeteer",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "babel src/ -d dist/",
+    "release": "npm version patch && yarn build && git add . && git commit --amend --reuse-message=HEAD && git push --tags && git push && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zzarcon/page-favicon.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zzarcon/page-favicon/issues"
+  },
+  "homepage": "https://github.com/zzarcon/page-favicon#readme",
+  "dependencies": {
+    "puppeteer": "^0.10.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.53.1"
+  }
+}
