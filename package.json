@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "build": "babel src/ -d dist/",
+    "build": "babel index.js -d dist/index.js",
     "release": "npm version patch && yarn build && git add . && git commit --amend --reuse-message=HEAD && git push --tags && git push && npm publish"
   },
   "repository": {
