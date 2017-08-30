@@ -1,6 +1,6 @@
 {
   "name": "page-favicon",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Get any website favicon using Puppeteer",
   "main": "dist/index.js",
   "scripts": {
