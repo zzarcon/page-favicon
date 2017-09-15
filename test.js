@@ -1,8 +1,40 @@
+const del = require('node-delete');
+const {statSync} = require('fs');
 const getPageFavicon = require('.');
+const httpPage = 'http://zzarcon.github.io';
+const httpsPage = 'https://zzarcon.github.io';
 
-(async () => {
-  const icon = await getPageFavicon('https://www.google.com');
-  const base64 = await icon.save('./fixtures', 'custom.ico');
+const cleanUp = () => {
+  del.sync('./favicon.ico');
+  del.sync('./fixtures/*');
+};
 
-  console.log(base64);
-})();
+const existFile = path => statSync(path).isFile();
+
+beforeAll(cleanUp);
+afterAll(cleanUp);
+
+test('default', async () => {
+  const icon = await getPageFavicon(httpPage);
+
+  await icon.save();
+
+  expect(existFile('favicon.ico')).toBeTruthy();
+});
+
+test('specify destination', async () => {
+  const destination = './fixtures/custom.ico';
+  const icon = await getPageFavicon(httpPage);
+
+  await icon.save(destination);
+
+  expect(existFile(destination)).toBeTruthy();
+});
+
+test('https page', async () => {
+  const icon = await getPageFavicon(httpsPage);
+
+  await icon.save();
+
+  expect(existFile('favicon.ico')).toBeTruthy();
+});

@@ -58,5 +58,5 @@ typings/
 .env
 
 dist/
-fixtures/favicon.ico
-fixtures/custom.ico
+fixtures/*
+*.ico

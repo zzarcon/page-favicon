@@ -1,36 +1,14 @@
 // @flow
 
 const puppeteer = require('puppeteer');
-const http = require('http');
-const https = require('https');
-const {join} = require('path');
-const fs = require('fs');
 const {URL} = require('url');
+const saveImage = require('save-image');
 
-const save = (url: URL) => async (directory = '.', fileName = 'favicon.ico') => {
-  const get = url.protocol === 'https:' ? https.get : http.get;
-
-  return new Promise((resolve, reject) => {
-    get(url.href, res => {
-      let rawData = '';
-
-      res.setEncoding('binary');
-      res.on('error', reject);
-      res.on('data', chunk => rawData += chunk);
-      res.on('end', () => {
-        const destination = join(__dirname, directory, fileName);
-        fs.writeFile(destination, rawData, 'binary', (err) => {
-          if (err) return reject(err);
-
-          console.log(destination, rawData.length);
-          resolve(rawData);
-        });
-      });
-    });
-  });
+const save = (url /*: URL*/) => async (destination /*: string*/) => {
+  await saveImage(url.href, destination);
 };
 
-module.exports = async (siteUrl: string) => {
+module.exports = async (siteUrl /*: string*/) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -45,7 +23,7 @@ module.exports = async (siteUrl: string) => {
   let url;
 
   try {
-    url = new URL(faviconUrl, siteUrl)
+    url = new URL(faviconUrl, siteUrl);
   } catch (e) {
     return new Error(`error creating URL ${e}`);
   }

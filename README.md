@@ -1,5 +1,19 @@
 # page-favicon
-> Get any website favicon using Puppeteer
+> Get a website favicon with ease
+
+# Installation
+
+```
+$ yarn add page-favicon
+```
+
+# Usage
+
+```
+import getPageFavicon from 'page-favicon';
+
+
+```
 
 # TODO
 
